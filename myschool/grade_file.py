@@ -34,6 +34,11 @@ class GradeFile:
         except Exception as ex:
             print("Error parsing grade file '%s'"%self.file)
             raise ex
+        self.dir = os.path.dirname(self.file)
+        self.sub_files = [ os.path.join(root,f)
+                for root, _, files in os.walk(self.dir)
+                for f in files
+                if not grade_file_re.match(f)]
 
     def save(self):
         f = open(self.file, 'w', encoding='latin1')
