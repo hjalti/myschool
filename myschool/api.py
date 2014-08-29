@@ -44,7 +44,8 @@ def get_student_list(course_id, user, passw):
     soup = get_soup(url, user, passw)
     students = [ create_student(row('td')[1].text,
         row('td')[4].text,
-        row('td')[5].a['href'])
+        row('td')[5].a['href'],
+        row('td')[6].text)
             for row in soup.find('form', id='MyForm')('tr')[1:-2] ]
     return [ next(x) for _, x in groupby(students, lambda x: x.kt) ]
 

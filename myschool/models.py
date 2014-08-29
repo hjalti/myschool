@@ -24,8 +24,10 @@ class Submission(Base):
         self.comment = comment
 
 class Student(Base):
-    def __init__(self, name, kt, username = None):
+    def __init__(self, name, kt, username = None, **kwargs):
         self.name = name
         self.username = username
         self.kt = kt
+        for k,v in kwargs:
+            setattr(self, k, v)
 

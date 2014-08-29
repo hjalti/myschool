@@ -41,9 +41,11 @@ def create_assignment(name, date, url):
     return Assignment(id, name, date, cid)
 
 
-def create_student(name, username, url):
-    return Student(name,
-            parse_qs(url)['kt'],
-            username)
+def create_student(name, username, url, group):
+    s = Student(name,
+        parse_qs(url)['kt'],
+        username)
+    s.group = group
+    return s
 
 
