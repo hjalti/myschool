@@ -37,7 +37,7 @@ def create_course(name_str, url):
             *parse_course_str(name_str))
 
 def create_assignment(name, date, url):
-    id, cid = parse_assignment_url(url)
+    cid, id = parse_assignment_url(url)
     return Assignment(id, name, date, cid)
 
 

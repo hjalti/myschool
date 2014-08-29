@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='MyschoolScraper',
-    version='0.1.2',
+    version='0.1.3',
     author='Hjalti Magnússon',
     author_email='hjaltmann@gmail.com',
     packages=['myschool'],
