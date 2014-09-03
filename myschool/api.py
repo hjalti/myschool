@@ -27,8 +27,8 @@ def get_course_assignments(course_id, user, passw):
     return [ create_assignment(assignment('td')[1].text,
             parse_date(assignment('td')[4].text),
             assignment('td')[1].a['href'])
-        for group in soup.find('div', class_='ruContentPage')('table')[1:]
-        for assignment in group('tr')[3:-1] ]
+        for group in soup.find('div', class_='ruContentPage')('tbody')
+        for assignment in group('tr')[1:-1] ]
 
 def get_assignment_submissions(course_id, assignment_id, user, passw):
     url = ASSIGNMENT.format(course_id, assignment_id)
