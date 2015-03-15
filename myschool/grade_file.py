@@ -2,7 +2,7 @@ import re
 import os
 
 from .utils import parse_float, float_str
-from .models import Student
+from .models import Student, Submission
 
 SPLITTER = '----------[Memo]----------'
 grade_file_re = re.compile('-?([\d,.]*)-einkunn\.txt', re.I)
@@ -15,6 +15,9 @@ def get_all_grade_files(d):
             if grade_file_re.match(f):
                 res.append(GradeFile(os.path.join(root,f)))
     return res
+
+def get_grade_file_submissions(gfs):
+    return sum(map(lambda x: x.submissions(), gfs), [])
 
 class GradeFile:
     def __init__(self, file):
@@ -35,6 +38,7 @@ class GradeFile:
             print("Error parsing grade file '%s'"%self.file)
             raise ex
         self.dir = os.path.dirname(self.file)
+        self.id = os.path.basename(self.dir)
         self.sub_files = [ os.path.join(root,f)
                 for root, _, files in os.walk(self.dir)
                 for f in files
@@ -50,3 +54,14 @@ class GradeFile:
 
         dr, name = os.path.split(self.file)
         os.rename(os.path.join(self.file),os.path.join(dr, '%s-einkunn.txt'%float_str(self.grade)))
+
+    def submission(self):
+        return self.submissions()[0]
+
+    def submissions(self):
+        return [Submission(
+            s.kt,
+            self.id,
+            self.grade,
+            self.comment) for s in self.students ]
+

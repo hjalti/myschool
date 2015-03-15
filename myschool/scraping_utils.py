@@ -2,7 +2,8 @@ import urllib.parse
 import re
 
 from datetime import datetime
-from .models import Student, Assignment, Course
+from .models import Student, Assignment, Course, Submission
+from .utils import parse_float
 
 COURSE_ID = 'fagid'
 ASSIGNMENT_ID = 'verkid'
@@ -48,4 +49,10 @@ def create_student(name, username, url, group):
     s.group = group
     return s
 
-
+def create_submission(kt, id, grade, comment):
+    if grade:
+        grade = parse_float(grade)
+    else:
+        grade = 0
+    return Submission(kt,
+        id, grade, comment)

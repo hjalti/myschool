@@ -1,8 +1,8 @@
 from distutils.core import setup
 
 setup(
-    name='MyschoolScraper',
-    version='0.1.4',
+    name='myschool',
+    version='0.1.6',
     author='Hjalti Magnússon',
     author_email='hjaltmann@gmail.com',
     packages=['myschool'],
