@@ -21,7 +21,7 @@ def get_soup(url, user, passw):
 def get_all_courses(user, passw):
     soup = get_soup(COURSES, user, passw)
     return [ create_course(tab.span['title'], tab.a['href'])
-            for tab in soup.find('ul', class_='ruTabsNew')('li') ]
+            for tabs in soup.findAll('ul', class_='ruTabsNew') for tab in tabs('li')  ]
 
 def get_course_assignments(course_id, user, passw):
     soup = get_soup(COURSE_ASSIGNMENTS.format(course_id), user, passw)
