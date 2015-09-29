@@ -12,7 +12,7 @@ COURSES = 'https://myschool.ru.is/myschool/?Page=Exe&ID=2.10'
 COURSE_ASSIGNMENTS = 'https://myschool.ru.is/myschool/?Page=LMS&ID=16&FagID={0}&View=52&ViewMode=0&Tab=2'
 ASSIGNMENT = 'https://myschool.ru.is/myschool/?Page=LMS&ID=16&fagID={0}&View=52&ViewMode=2&Tab=&Act=3&VerkID={1}'
 STUDENT_LIST = 'https://myschool.ru.is/myschool/?Page=LMS&ID=8&FagID={0}&View=41&ViewMode=2&Tab=&Filter=0'
-
+POST_GRADES='https://myschool.ru.is/myschool/?Page=LMS&ID=16&fagID={0}&View=52&ViewMode=0&Tab=6&verkID={1}&Act=3&OPBirta=1&id_hopur='
 
 def get_soup(url, user, passw):
     resp = r.get(url, auth = (user, passw))
@@ -62,3 +62,7 @@ def submit_grades(submissions, course_id, assignment_id, user, passw):
     r.post(ASSIGNMENT.format(course_id, assignment_id),
             data=sub_data,
             auth = (user, passw))
+
+def post_grades(course_id, assignment_id, user,passw):
+    url = POST_GRADES.format(course_id, assignment_id)
+    get_soup(url, user, passw)
